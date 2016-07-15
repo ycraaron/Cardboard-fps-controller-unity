@@ -34,7 +34,7 @@ A.
   11. Drag GvrPerticle from project path Assets - GoogleVR - prefabs - UI to the Head
   12. In Hierarchy, click creat - UI - Eventsystem
   13. In inspector(with Eventsystem selected), click add component, search GazeInput and choose GazeInputModule
-  14. Choose FPSController, replace the FirstPersonController with the file in this repo.
+  14. Choose FPSController, replace the script attached to it: FirstPersonController.cs with the file in this repo.
   
 B.
   5. Open demo scene in path Assets-GoogleVR-DemoScenes-HeadSetDemo
@@ -42,6 +42,6 @@ B.
   7. Delete child node named FirstPersonCharacter in FPScontroller prefab
   8. Drag the FPScontroller prefab root node(FPScontroller) to Gvrmain
   9. Drag Gvrmain's child node Head to FPScontroller.
-  10. Choose FPSController, replace the FirstPersonController with the file in this repo.
+  10. Choose FPSController, replace the script attached to it: FirstPersonController.cs with the file in this repo.
   
 Try to play around with it!

@@ -63,9 +63,9 @@ B.
 
 10.Choose FPSController, replace the script attached to it: FirstPersonController.cs with the file in this repo.
 
-11. Delete the main camera in hierarchy
+11.Delete the main camera in hierarchy
 
-12. Expand the plane to (x,y,z)->(100,1,100)
+12.Expand the plane to (x,y,z)->(100,1,100)
 
 
 Try to play around with it!

@@ -47,9 +47,11 @@ A.
 
 14.Choose FPSController, replace the script attached to it: FirstPersonController.cs with the file in this repo.
 
+15.Create a new plane and expand it to (x,y,z) = (100,1,100)
+
 B.
 
-5.Open demo scene in path Assets-GoogleVR-DemoScenes-HeadSetDemo
+5.Open demo scene in path Assets-GoogleVR-DemoScenes-HeadSetDemo-DemoScene
 
 6.Drag FPScontroller prefab from project path: Standard Assets - Characters -FirstPersonCharacter - Prefabs
 
@@ -60,6 +62,10 @@ B.
 9.Drag Gvrmain's child node Head to FPScontroller.
 
 10.Choose FPSController, replace the script attached to it: FirstPersonController.cs with the file in this repo.
+
+11. Delete the main camera in hierarchy
+
+12. Expand the plane to (x,y,z)->(100,1,100)
 
 
 Try to play around with it!

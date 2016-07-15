@@ -67,5 +67,6 @@ B.
 
 12.Expand the plane to (x,y,z)->(100,1,100)
 
+13.Select FpsController in hierarchy, drag Head to the variable head in script
 
 Try to play around with it!

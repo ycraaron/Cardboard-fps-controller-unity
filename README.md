@@ -2,7 +2,9 @@
 Part 1:  Description
 
 I.The code is from Unity sample asset-FirstPersonController, I make some changes to fit with cardboard.
+
 II.It allows you to move using keyboard and select object in game world using gaze input.
+
 III.To enable auto walk, uncomment the line "//m_Input.y=1;" in FixedUpdate() function.
 
 Things need to be done in the future:

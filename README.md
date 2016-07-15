@@ -1,6 +1,6 @@
 # Cardboard-fps-controller-unity
-Part 1 
-Description
+Part 1:  Description
+
 1.The code is from Unity sample asset-FirstPersonController, I make some changes to fit with cardboard.
 2.It allows you to move using keyboard and select object in game world using gaze input.
 3.To enable auto walk, uncomment the line "//m_Input.y=1;" in FixedUpdate() function.
@@ -10,7 +10,7 @@ Things need to be done in the future:
   2. Implement touch-move: touch screen, move foward.
 
 
-Part 2: 
+Part 2:  
 Steps to build a VR first person controller in unity for cardboard:
   
 Assuming that you have already installed Unity 5.3 or above and Java:

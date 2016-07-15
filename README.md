@@ -1,9 +1,9 @@
 # Cardboard-fps-controller-unity
 Part 1:  Description
 
-1.The code is from Unity sample asset-FirstPersonController, I make some changes to fit with cardboard.
-2.It allows you to move using keyboard and select object in game world using gaze input.
-3.To enable auto walk, uncomment the line "//m_Input.y=1;" in FixedUpdate() function.
+I.The code is from Unity sample asset-FirstPersonController, I make some changes to fit with cardboard.
+II.It allows you to move using keyboard and select object in game world using gaze input.
+III.To enable auto walk, uncomment the line "//m_Input.y=1;" in FixedUpdate() function.
 
 Things need to be done in the future:
   1. In order to play the game using mobile devices, we need to add touch input.

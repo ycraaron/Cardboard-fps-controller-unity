@@ -99,7 +99,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             GetInput(out speed);
             // always move along the camera forward as it is the direction that it being aimed at
             //Vector3 desiredMove = transform.forward*m_Input.y + transform.right*m_Input.x;
+
+			//For Auto walk, uncomment this line.
 			//m_Input.y=1;
+
+
 			Vector3 desiredMove = head.transform.forward*m_Input.y + head.transform.right*m_Input.x;
 
 

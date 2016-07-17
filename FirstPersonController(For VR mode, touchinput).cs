@@ -42,6 +42,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 		public GameObject head;
+		public int _moveDirection;   // 1 or -1
 
         // Use this for initialization
         private void Start()
@@ -56,6 +57,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+			_moveDirection = 1;
         }
 
 
@@ -63,6 +65,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private void Update()
         {
             RotateView();
+			//Debug.Log("Update time :" + Time.deltaTime);
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
@@ -98,9 +101,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
 
             float speed;
+
             GetInput(out speed);
 
 
+			//Debug.Log("FixedUpdate time :" + Time.deltaTime);
             // always move along the camera forward as it is the direction that it being aimed at
             //Vector3 desiredMove = transform.forward*m_Input.y + transform.right*m_Input.x;
 
@@ -228,10 +233,33 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			float horizontal = 0.0f;
 			float vertical = 0.0f;
 
+			int i = 0;
+			//Touch touch;
+
 			if (Input.touchCount > 0) {
-				print ("touch");
-				vertical = 0.2f;
-			}
+				for (i = 0; i < Input.touchCount; i++) {
+					Touch touch = Input.GetTouch (i);
+					//print ("touchcount" + Input.touchCount);
+					if (touch.phase == TouchPhase.Began) {
+						print ("Touch began");
+						if (touch.tapCount == 1) {
+							print ("Tap count = 1");
+							_moveDirection = 1;
+						}  
+						else if (touch.tapCount == 2) {
+							print ("Tap count = 2");
+							_moveDirection = -1;
+						}
+					}  
+					else if (touch.phase == TouchPhase.Stationary) {
+						print ("");
+						vertical = 0.1f * _moveDirection;
+					}  
+				}
+			}  else
+				vertical = 0;
+
+
 
 			// Use mouse to simulate the touch screen, if user touch then move forward
 			// Added by Aaron 2016.07.16

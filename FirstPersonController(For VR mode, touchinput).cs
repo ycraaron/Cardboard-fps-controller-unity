@@ -42,7 +42,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 		public GameObject head;
-		public int _moveDirection;   // 1 or -1
+		public float _moveDirection;   // 1 or -1
 
         // Use this for initialization
         private void Start()
@@ -237,28 +237,27 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			//Touch touch;
 
 			if (Input.touchCount > 0) {
+				print ("touchcount" + Input.touchCount);
 				for (i = 0; i < Input.touchCount; i++) {
 					Touch touch = Input.GetTouch (i);
-					//print ("touchcount" + Input.touchCount);
 					if (touch.phase == TouchPhase.Began) {
-						print ("Touch began");
-						if (touch.tapCount == 1) {
-							print ("Tap count = 1");
-							_moveDirection = 1;
+						//print ("Touch began");
+						if (touch.tapCount >= 2) {
+							//print ("Tap count >= 2");
+							_moveDirection = -1.0f;
 						}  
-						else if (touch.tapCount == 2) {
-							print ("Tap count = 2");
-							_moveDirection = -1;
+						else {
+							//print ("Tap count = 2");
+							_moveDirection = 1.0f;
 						}
 					}  
 					else if (touch.phase == TouchPhase.Stationary) {
-						print ("");
 						vertical = 0.1f * _moveDirection;
+						//print ("keep touching" + vertical);
 					}  
 				}
 			}  else
-				vertical = 0;
-
+				vertical = 0.0f;
 
 
 			// Use mouse to simulate the touch screen, if user touch then move forward

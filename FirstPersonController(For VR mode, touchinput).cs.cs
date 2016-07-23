@@ -30,7 +30,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private Camera m_Camera;
         private bool m_Jump;
-        private float m_YRotation;
+		//Added by aaron;
+		private bool vr_Jump;
+		private bool vr_Jumping;
+
+		private float m_YRotation;
         private Vector2 m_Input;
         private Vector3 m_MoveDir = Vector3.zero;
         private CharacterController m_CharacterController;
@@ -42,7 +46,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 		public GameObject head;
-		public float _moveDirection;   // 1 or -1
+
+		private float _moveDirection;   // 1 or -1
+		private Gyroscope vr_Gyro;
+		private float vr_GyroAccYAxis = 0;
+
+		public int tmp_count;
+		public int tmp_device;
 
         // Use this for initialization
         private void Start()
@@ -58,6 +68,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
 			_moveDirection = 1;
+
+			tmp_count = 0;
+			tmp_device = 0;
         }
 
 
@@ -66,11 +79,40 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             RotateView();
 			//Debug.Log("Update time :" + Time.deltaTime);
-            // the jump state needs to read here to make sure it is not missed
+            // the jump state needs to read here to make sure it is not missed // comment by aaron, yes, quite right, I missed when putting it in FixedUpdate
+			if (!m_Jump)
+			{
+				vr_Gyro = Input.gyro;
+				vr_GyroAccYAxis = vr_Gyro.userAcceleration.y;
+				if (vr_GyroAccYAxis > 2 && vr_GyroAccYAxis <= 3) {
+					print ("jump in update over 2 acc is" + vr_GyroAccYAxis);	
+				} else if (vr_GyroAccYAxis >= 1 && vr_GyroAccYAxis <= 2) {
+					print ("jump in update over 1 acc is" + vr_GyroAccYAxis);	
+					m_Jump = true;
+				} else if (vr_GyroAccYAxis >= 0.1 && vr_GyroAccYAxis < 1) {
+					print ("jump in update over 0.1 acc is" + vr_GyroAccYAxis);	
+					m_Jump = false;
+				} else if (vr_GyroAccYAxis >= 0.08 && vr_GyroAccYAxis < 0.1) {
+					print ("jump in update over 0.08 acc is" + vr_GyroAccYAxis);	
+					m_Jump = false;
+				} else if (vr_GyroAccYAxis >= 0.05 && vr_GyroAccYAxis < 0.08) {
+					print ("jump in update over 0.05 acc is" + vr_GyroAccYAxis);	
+					m_Jump = false;
+				} else if (vr_GyroAccYAxis >= 0.02 && vr_GyroAccYAxis < 0.05) {
+					print ("jump in update over 0.02 acc is" + vr_GyroAccYAxis);	
+					m_Jump = false;
+				} else if (vr_GyroAccYAxis > 0 && vr_GyroAccYAxis < 0.02) {
+					print ("jump in update over 0, acc is" + vr_GyroAccYAxis);	
+					m_Jump = false;
+				}
+			}
+
+#if !MOBILE_INPUT
             if (!m_Jump)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
+#endif
 
             if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
             {
@@ -117,10 +159,24 @@ namespace UnityStandardAssets.Characters.FirstPerson
 //			} else {
 //				m_Input.y = 0;
 //			}
+//
+//			if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
+//			{
+//				StartCoroutine(m_JumpBob.DoBobCycle());
+//				PlayLandingSound();
+//				m_MoveDir.y = 0f;
+//				m_Jumping = false;
+//			}
+//			if (!m_CharacterController.isGrounded && !m_Jumping && m_PreviouslyGrounded)
+//			{
+//				m_MoveDir.y = 0f;
+//			}
+//
+//			m_PreviouslyGrounded = m_CharacterController.isGrounded;
+
 			Vector3 desiredMove = head.transform.forward*m_Input.y + head.transform.right*m_Input.x;
 
 			//print (desiredMove);
-
 
             // get a normal for the surface that is being touched to move along it
             RaycastHit hitInfo;
@@ -130,7 +186,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             m_MoveDir.x = desiredMove.x*speed;
             m_MoveDir.z = desiredMove.z*speed;
-
 
             if (m_CharacterController.isGrounded)
             {

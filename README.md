@@ -23,34 +23,6 @@ Assuming that you have already installed Unity 5.3 or above and Java:
 
 4.Import Unity FPS controller from menu-Assets-Import Packages-Characters.
 
-Now you can choose A or B to set up (Suggest to choose B first)
-
-A.
-
-5.Drag Gvrmain from project path: Assets - GoogleVR - prefabs to Hierarchy.
-
-6.Drag FPScontroller prefab from project path: Standard Assets - Characters -FirstPersonCharacter - Prefabs
-
-7.Delete the main camera in the Hierarchy.
-
-8.Delete child node named FirstPersonCharacter in FPScontroller prefab
-
-9.Drag the FPScontroller prefab root node(FPScontroller) to Gvrmain
-
-10.Drag Gvrmain's child node Head to FPScontroller.
-
-11.Drag GvrPerticle from project path Assets - GoogleVR - prefabs - UI to the Head
-
-12.In Hierarchy, click creat - UI - Eventsystem
-
-13.In inspector(with Eventsystem selected), click add component, search GazeInput and choose GazeInputModule
-
-14.Choose FPSController, replace the script attached to it: FirstPersonController.cs with the file in this repo.
-
-15.Create a new plane and expand it to (x,y,z) = (100,1,100)
-
-B.
-
 5.Open demo scene in path Assets-GoogleVR-DemoScenes-HeadSetDemo-DemoScene
 
 6.Drag FPScontroller prefab from project path: Standard Assets - Characters -FirstPersonCharacter - Prefabs

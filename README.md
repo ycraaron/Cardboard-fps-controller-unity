@@ -14,7 +14,7 @@ Implement touch-move: touch screen, move foward.
 Part 2:
 Steps to build a VR first person controller in unity for cardboard:
 
-Assuming that you have already installed Unity 5.3(5.4.0f is also compatible and the world space canvas bug has been fixed) or above and Java:
+Assuming that you have already installed Unity 5.3 or above(5.4.0f is also compatible and the world space canvas bug has been fixed) and Java:
 
 1.Download GVR cardboard unity sdk from the link: https://developers.google.com/vr/unity/download
 
